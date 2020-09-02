@@ -1,7 +1,7 @@
 ## Update score for player
 
-- Make button with + on it
-- Event listener & handler
+- X Make button with + on it
+- X Event listener & handler
 - Make a callback prop
   - Define a function in Scoreboard which can update players (incrementScore)
   - Pass incrementScore down to Player as a prop
