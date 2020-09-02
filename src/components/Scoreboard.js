@@ -13,16 +13,18 @@ export default function Scoreboard() {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
-  //   const players_sorted =
-  //     // first "copy" the array
-  //     [...players]
-  //       // then sort it with the `compare_score` callback function
-  //       .sort(compare_score);
+  const players_sorted =
+    // first "copy" the array
+    [...players]
+      // then sort it with the `compare_score` callback function
+      .sort(compare_score);
+
+  console.log("SORTED!", players_sorted);
 
   return (
     <div className="Scoreboard">
       <h1>Scoreboard</h1>
-      {players.map((player) => {
+      {players_sorted.map((player) => {
         console.log("PLAYER:", player);
 
         return (
