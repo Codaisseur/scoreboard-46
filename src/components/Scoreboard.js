@@ -35,6 +35,7 @@ export default function Scoreboard() {
     });
     console.log("ORIGINAL:", players);
     console.log("UPDATED:", updatedPlayers);
+    set_players(updatedPlayers);
   }
 
   // using a callback prop
