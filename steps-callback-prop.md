@@ -7,6 +7,6 @@
   - X Pass incrementScore down to Player as a prop
   - X Call incrementScore when the + button gets clicked
 - X Pass the id of the player as an argument to incrementScore
-- LOGIC -> update the players
+- X LOGIC -> update the players
 - call setPlayers
 - Check

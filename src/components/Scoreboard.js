@@ -21,6 +21,20 @@ export default function Scoreboard() {
   // incrementScore -> callback prop
   function incrementScore(playerId) {
     console.log("I AM A CALLBACK PROP", playerId);
+    const updatedPlayers = players.map((player) => {
+      console.log("PLAYER:", player);
+      if (player.id === playerId) {
+        console.log("UPDATE THIS PLAYER");
+        // player.score = player.score + 1;
+        // return player;
+        return { ...player, score: player.score + 1 };
+      } else {
+        console.log("DONT DO ANYTHING");
+        return player;
+      }
+    });
+    console.log("ORIGINAL:", players);
+    console.log("UPDATED:", updatedPlayers);
   }
 
   // using a callback prop
