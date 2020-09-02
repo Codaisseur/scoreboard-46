@@ -18,30 +18,16 @@ export default function Scoreboard() {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
+  // using a callback prop
+  // function -> has access to setPlayer -> pass down as a prop to Player
+
   const compareFunction = sort_by === "score" ? compare_score : compare_name;
 
-  const players_sorted = [...players]
-    // then sort it with the `compare_score` callback function
-    .sort(compareFunction);
-
-  //   if (sort_by === "score") {
-  //     // first "copy" the array
-  //     players_sorted = [...players]
-  //       // then sort it with the `compare_score` callback function
-  //       .sort(compare_score);
-  //   } else {
-  //     // sort by name
-  //     players_sorted = [...players]
-  //       // then sort it with the `compare_score` callback function
-  //       .sort(compare_name);
-  //   }
+  const players_sorted = [...players].sort(compareFunction);
 
   const change_sorting = (event) => {
-    console.log("new sort order:", event.target.value);
     set_sort_by(event.target.value);
   };
-
-  console.log("SORTED!", players_sorted);
 
   return (
     <div className="Scoreboard">
@@ -54,8 +40,6 @@ export default function Scoreboard() {
         </select>
       </p>
       {players_sorted.map((player) => {
-        // console.log("PLAYER:", player);
-
         return (
           <Player
             key={player.id}
