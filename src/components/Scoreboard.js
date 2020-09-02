@@ -18,6 +18,11 @@ export default function Scoreboard() {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
+  // incrementScore -> callback prop
+  function incrementScore() {
+    console.log("I AM A CALLBACK PROP");
+  }
+
   // using a callback prop
   // function -> has access to setPlayer -> pass down as a prop to Player
 
@@ -46,6 +51,7 @@ export default function Scoreboard() {
             id={player.id}
             name={player.name}
             score={player.score}
+            incrementScore={incrementScore}
           />
         );
       })}
