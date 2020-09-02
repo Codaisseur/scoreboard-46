@@ -19,8 +19,8 @@ export default function Scoreboard() {
   ]);
 
   // incrementScore -> callback prop
-  function incrementScore() {
-    console.log("I AM A CALLBACK PROP");
+  function incrementScore(playerId) {
+    console.log("I AM A CALLBACK PROP", playerId);
   }
 
   // using a callback prop
