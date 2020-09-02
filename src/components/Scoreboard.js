@@ -18,19 +18,23 @@ export default function Scoreboard() {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
-  let players_sorted;
+  const compareFunction = sort_by === "score" ? compare_score : compare_name;
 
-  if (sort_by === "score") {
-    // first "copy" the array
-    players_sorted = [...players]
-      // then sort it with the `compare_score` callback function
-      .sort(compare_score);
-  } else {
-    // sort by name
-    players_sorted = [...players]
-      // then sort it with the `compare_score` callback function
-      .sort(compare_name);
-  }
+  const players_sorted = [...players]
+    // then sort it with the `compare_score` callback function
+    .sort(compareFunction);
+
+  //   if (sort_by === "score") {
+  //     // first "copy" the array
+  //     players_sorted = [...players]
+  //       // then sort it with the `compare_score` callback function
+  //       .sort(compare_score);
+  //   } else {
+  //     // sort by name
+  //     players_sorted = [...players]
+  //       // then sort it with the `compare_score` callback function
+  //       .sort(compare_name);
+  //   }
 
   const change_sorting = (event) => {
     console.log("new sort order:", event.target.value);
