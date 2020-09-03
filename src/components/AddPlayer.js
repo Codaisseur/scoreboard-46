@@ -4,10 +4,10 @@ const AddPlayer = props => {
   //console.log("form props", props); // props.newPlayer(name)
   const [name, setName] = useState("");
 
-  const onFieldChange = event => {
-    //console.log("im typing!", event.target.value);
-    setName(event.target.value);
-  };
+  // const onFieldChange = event => {
+  //   //console.log("im typing!", event.target.value);
+  //   setName(event.target.value);
+  // };
 
   const submitForm = event => {
     event.preventDefault();

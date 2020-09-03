@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Player from "./Player";
 import AddPlayer from "./AddPlayer";
 
@@ -58,6 +59,7 @@ export default function Scoreboard() {
 
   return (
     <div className='Scoreboard'>
+      <Link to='/discover'>To Discover Page</Link>
       <h1>Scoreboard</h1>
       <p>
         Sort order:{" "}
