@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Player from "./Player";
+import AddPlayer from "./AddPlayer";
 
 function compare_score(player_a, player_b) {
   return player_b.score - player_a.score;
@@ -21,7 +22,7 @@ export default function Scoreboard() {
   // incrementScore -> callback prop
   function incrementScore(playerId) {
     // console.log("I AM A CALLBACK PROP", playerId);
-    const updatedPlayers = players.map((player) => {
+    const updatedPlayers = players.map(player => {
       // console.log("PLAYER:", player);
       if (player.id === playerId) {
         // console.log("UPDATE THIS PLAYER");
@@ -38,6 +39,12 @@ export default function Scoreboard() {
     set_players(updatedPlayers);
   }
 
+  const newPlayer = name => {
+    console.log("getting name in scoreboard?", name);
+    const extraPlayer = [...players, { id: 10, score: 0, name }];
+    set_players(extraPlayer);
+  };
+
   // using a callback prop
   // function -> has access to setPlayer -> pass down as a prop to Player
 
@@ -45,21 +52,21 @@ export default function Scoreboard() {
 
   const players_sorted = [...players].sort(compareFunction);
 
-  const change_sorting = (event) => {
+  const change_sorting = event => {
     set_sort_by(event.target.value);
   };
 
   return (
-    <div className="Scoreboard">
+    <div className='Scoreboard'>
       <h1>Scoreboard</h1>
       <p>
         Sort order:{" "}
         <select onChange={change_sorting} value={sort_by}>
-          <option value="score">Sort by score</option>
-          <option value="name">Sort by name</option>
+          <option value='score'>Sort by score</option>
+          <option value='name'>Sort by name</option>
         </select>
       </p>
-      {players_sorted.map((player) => {
+      {players_sorted.map(player => {
         return (
           <Player
             key={player.id}
@@ -70,6 +77,7 @@ export default function Scoreboard() {
           />
         );
       })}
+      <AddPlayer newPlayer={newPlayer} />
     </div>
   );
 }
