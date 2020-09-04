@@ -10,7 +10,7 @@ function App() {
     <div className='App'>
       <header className='App-header'>
         <Switch>
-          <Route path='/discover/:searchTerm?' component={Discover} />
+          <Route path='/discover/:textToSearch?' component={Discover} />
           <Route path='/details/:movieId' component={DetailsPage} />
           <Route path='/' component={Scoreboard} exact />
         </Switch>

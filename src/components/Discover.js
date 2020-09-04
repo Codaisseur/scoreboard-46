@@ -1,31 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 const Discover = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
-  const history = useHistory();
   const params = useParams();
+  const history = useHistory();
+  // console.log("url params", params); // { textToSearch: undefined || "matrix" }
 
-  console.log("url", params);
-  const onSearchClick = async e => {
-    // console.log("hey!");
+  useEffect(() => {
+    console.log("im running!");
+    const doSearch = async () => {
+      const queryParam = encodeURIComponent(params.textToSearch);
+      const response = await axios.get(
+        `http://www.omdbapi.com/?i=tt3896198&apikey=f0d0fe5&s=${queryParam}`
+      );
+      console.log(response.data);
+      // do axios call - DONE
+      // set response to state
+      setMovies(response.data.Search);
+    };
+    if (params.textToSearch) {
+      doSearch();
+    }
+  }, [params.textToSearch]);
+
+  const setSearchUrl = async e => {
     e.preventDefault();
-    const queryParam = encodeURIComponent(searchTerm);
-    // console.log("my query param", queryParam);
-    const response = await axios.get(
-      `http://www.omdbapi.com/?apikey=f0d0fe5&s=${queryParam}`
-    );
-    // console.log("data", response.data.Search);
-    setMovies(response.data.Search);
-    history.push(`/discover/${queryParam}`);
+    const parsedTerm = encodeURIComponent(searchTerm);
+    history.push(`/discover/${parsedTerm}`);
   };
 
-  console.log("my data", movies);
   return (
     <div>
-      <form onSubmit={onSearchClick}>
+      <form onSubmit={setSearchUrl}>
         <input
           onChange={e => setSearchTerm(e.target.value)}
           value={searchTerm}
