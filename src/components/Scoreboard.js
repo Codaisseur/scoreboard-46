@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Player from "./Player";
-import AddPlayer from "./AddPlayer";
+import AddPlayerForm from "./AddPlayer";
 
 function compare_score(player_a, player_b) {
   return player_b.score - player_a.score;
@@ -22,32 +22,23 @@ export default function Scoreboard() {
 
   // incrementScore -> callback prop
   function incrementScore(playerId) {
-    // console.log("I AM A CALLBACK PROP", playerId);
     const updatedPlayers = players.map(player => {
-      // console.log("PLAYER:", player);
       if (player.id === playerId) {
-        // console.log("UPDATE THIS PLAYER");
-        // player.score = player.score + 1;
-        // return player;
         return { ...player, score: player.score + 1 };
       } else {
-        // console.log("DONT DO ANYTHING");
         return player;
       }
     });
-    // console.log("ORIGINAL:", players);
-    // console.log("UPDATED:", updatedPlayers);
     set_players(updatedPlayers);
   }
 
-  const newPlayer = name => {
-    console.log("getting name in scoreboard?", name);
-    const extraPlayer = [...players, { id: 10, score: 0, name }];
-    set_players(extraPlayer);
+  const resetOnePlayer = id => {
+    console.log("guy to reset", id);
+    const updatedPlayers = players.map(p =>
+      p.id === id ? { ...p, score: 0 } : p
+    );
+    set_players(updatedPlayers);
   };
-
-  // using a callback prop
-  // function -> has access to setPlayer -> pass down as a prop to Player
 
   const compareFunction = sort_by === "score" ? compare_score : compare_name;
 
@@ -57,6 +48,24 @@ export default function Scoreboard() {
     set_sort_by(event.target.value);
   };
 
+  const resetAllScores = () => {
+    const updatedPlayers = players.map(p => {
+      return { ...p, score: 0 };
+    });
+    set_players(updatedPlayers);
+  };
+
+  const addPlayerCallback = name => {
+    const newGuy = {
+      id: players.length + 1,
+      name,
+      score: 0, // == 0
+    };
+
+    const extraPlayerArray = [...players, newGuy];
+    set_players(extraPlayerArray);
+  };
+  console.log(players);
   return (
     <div className='Scoreboard'>
       <Link to='/discover'>To Discover Page</Link>
@@ -68,6 +77,7 @@ export default function Scoreboard() {
           <option value='name'>Sort by name</option>
         </select>
       </p>
+      <button onClick={resetAllScores}>Resets All Scores</button>
       {players_sorted.map(player => {
         return (
           <Player
@@ -76,10 +86,11 @@ export default function Scoreboard() {
             name={player.name}
             score={player.score}
             incrementScore={incrementScore}
+            resetOnePlayer={resetOnePlayer}
           />
         );
       })}
-      <AddPlayer newPlayer={newPlayer} />
+      <AddPlayerForm addPlayerCallback={addPlayerCallback} />
     </div>
   );
 }

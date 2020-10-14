@@ -5,11 +5,12 @@ export default function Player(props) {
     // console.log(`Clicked ${props.name}!`);
     props.incrementScore(props.id);
   }
-
+  const { name: fullName, score, id, resetOnePlayer } = props;
   return (
     <div>
-      {props.name} - score: {props.score}
+      {fullName} - score: {score}
       <button onClick={handleClick}>+</button>
+      <button onClick={() => resetOnePlayer(id)}>Reset</button>
     </div>
   );
 }
